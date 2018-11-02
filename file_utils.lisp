@@ -1,20 +1,27 @@
 ;; Portable Pathname Library
+(defpackage :com.julian.pathnames
+  (:use :common-lisp)
+  (:export :list-directory
+           :file-exists-p
+           :directory-pathname-p
+           :file-pathname-p
+           :pathname-as-directory
+           :pathname-as-file
+           :walk-directory
+           :directory-p
+           :file-p))
+
+(in-package :com.julian.pathnames)
 
 ;; features #+, #-
 ;; *features*
-*features* ;; contains a bunch of features
-           ;;; 'feature expressions' use these to include/exclude functionality
-           ;;; depending on what features are available at read time
-           ;;; #+ reads feature expression and includes if available
-           ;;; #- reads feature expression and excludes if available
-           ;;; Guaranteed to have :sbcl, :allegro, :clisp, etc. on those
-           ;;; implementations.
-
-(defun foo ()
-  #+allegro 1
-  #+clisp 2
-  #+sbcl 3
-  #+cmu 4)
+;; contains a bunch of features
+;; 'feature expressions' use these to include/exclude functionality
+;; depending on what features are available at read time
+;; #+ reads feature expression and includes if available
+;; #- reads feature expression and excludes if available
+;; Guaranteed to have :sbcl, :allegro, :clisp, etc. on those
+;; implementations.
 
 ;; is a thing and isn't :unspecific
 (defun component-present-p (value)
@@ -71,7 +78,6 @@
     (error "list-directory not implemented"))
   )
 
-(list-directory ".")
 
 (defun pathname-as-file (name)
   ;; get pathname
